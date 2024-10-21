@@ -19,15 +19,19 @@
 */
 
 #include <iostream>
+#include <curl/curl.h>
 #include <cmath> // Biblioteca para funciones matemáticas
+#include "Persona.h"
 
-int main() {
+int main()
+{
+
     double peso, altura;
 
     // Solicitar datos del usuario
     std::cout << "Ingrese su peso en kilogramos: ";
     std::cin >> peso;
-    
+
     std::cout << "Ingrese su altura en metros: ";
     std::cin >> altura;
 
@@ -35,7 +39,7 @@ int main() {
     Persona persona(peso, altura);
 
     // Evaluar el IMC utilizando el objeto
-    persona.evaluarIMC();
-
+   // persona.evaluarIMC();
+    persona.calcularIMCAPI();
     return 0;
 }
