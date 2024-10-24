@@ -41,5 +41,6 @@ int main()
     // Evaluar el IMC utilizando el objeto
    // persona.evaluarIMC();
     persona.calcularIMCAPI();
+    //persona.JSON(persona.calcularIMCAPI());
     return 0;
 }

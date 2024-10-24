@@ -1,7 +1,8 @@
 # Variables
 CXX = g++                   # Especifica el compilador
-CXXFLAGS = -Wall -std=c++11  # Opciones del compilador: -Wall para las advertencias y -std=c++11 para usar C++11
+CXXFLAGS = -Wall -std=c++11  -I/usr/include/nlohmann # Opciones del compilador: -Wall para las advertencias y -std=c++11 para usar C++11
 LIBS = -lcurl                # Especifica que se debe enlazar la biblioteca curl
+
 
 # Nombre del ejecutable
 TARGET = programa

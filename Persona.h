@@ -18,13 +18,12 @@ Colaboradores:
 #include <iostream>
 #include <cmath>       // Biblioteca para funciones matemáticas
 #include <curl/curl.h> // cURL (Client URL) es una herramienta de línea de comandos y una biblioteca que se utiliza para transferir datos desde o hacia un servidor utilizando una gran variedad de protocolos, como HTTP,
-
+#include <string>
 class Persona
 {
 private:
     double peso;   // Atributo para el peso en kilogramos
     double altura; // Atributo para la altura en metros
-    int categoria;
 
 public:
     // Constructor para inicializar los atributos
@@ -32,7 +31,8 @@ public:
 
     // Método para calcular el IMC
     double calcularIMC() const;
-    void calcularIMCAPI() const;
+    std::string calcularIMCAPI() const;
+    void JSON(std::string responseString) const;
 
     // Método para obtener una evaluación del IMC
     void evaluarIMC() const;

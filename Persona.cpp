@@ -20,15 +20,17 @@
 #include "Persona.h"
 #include <sstream> // Para std::stringstream
 #include <string>
+#include <nlohmann/json.hpp> // Biblioteca JSON
 
-Persona::Persona(double p, double a) : peso(p), altura(a), categoria(0) {}
+
+Persona::Persona(double p, double a) : peso(p), altura(a) {}
 
 double Persona::calcularIMC() const
 {
     return peso / std::pow(altura, 2);
 }
 
-void Persona::calcularIMCAPI() const
+std::string Persona::calcularIMCAPI() const
 {
     // Inicializa una sesión de CURL y asigna el manejador a la variable 'hnd'
     CURL *hnd = curl_easy_init();
@@ -56,11 +58,52 @@ void Persona::calcularIMCAPI() const
     // Configura la solicitud CURL para usar los encabezados definidos
     curl_easy_setopt(hnd, CURLOPT_HTTPHEADER, headers);
 
+// Aquí creamos un std::string para almacenar el resultado
+        std::string responseString;
+        std::string tempBuffer;
+
+        // Capturar la salida estándar y redirigirla al string
+        FILE* fp = fopen("/tmp/imc_response.txt", "wb"); // Archivo temporal
+        curl_easy_setopt(hnd, CURLOPT_WRITEDATA, fp);    // Escribe la salida al archivo
+
+
     // Realiza la solicitud CURL
     CURLcode ret = curl_easy_perform(hnd);
 
-    // Imprime el código de retorno de la solicitud
-    std::cout << ret << std::endl;
+     // Si la solicitud es exitosa, leemos el archivo temporal a un std::string
+        if (ret == CURLE_OK) {
+            fclose(fp);  // Cerramos el archivo
+            fp = fopen("/tmp/imc_response.txt", "r"); // Lo abrimos para leer
+            if (fp) {
+                char buffer[1024]; // Buffer temporal para leer
+                while (fgets(buffer, sizeof(buffer), fp) != NULL) {
+                    responseString += buffer; // Acumulamos en responseString
+                }
+                fclose(fp);
+            }
+        } else {
+            std::cerr << "Error en la solicitud CURL: " << curl_easy_strerror(ret) << std::endl;
+        }
+
+        // Limpia los recursos
+        curl_slist_free_all(headers);
+        curl_easy_cleanup(hnd);
+        nlohmann::json jsonResponse = nlohmann::json::parse(responseString);
+
+                // Acceder a los datos del JSON
+                std::cout << "IMC: " << jsonResponse["bmi"] << std::endl;
+                std::cout << "Categoría: " << jsonResponse["bmi_category"] << std::endl;
+                
+        return responseString;
+}
+
+
+void Persona::JSON(std::string responseString) const{
+nlohmann::json jsonResponse = nlohmann::json::parse(responseString);
+
+                // Acceder a los datos del JSON
+                std::cout << "IMC: " << jsonResponse["bmi"] << std::endl;
+                std::cout << "Categoría: " << jsonResponse["bmi_category"] << std::endl;
 }
 
 void Persona::evaluarIMC() const
