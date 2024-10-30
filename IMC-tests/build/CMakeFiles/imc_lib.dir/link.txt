@@ -1,0 +1,2 @@
+/usr/bin/ar qc libimc_lib.a  CMakeFiles/imc_lib.dir/IMC.cpp.o
+/usr/bin/ranlib libimc_lib.a

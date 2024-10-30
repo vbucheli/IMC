@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/workspaces/IMC/IMC-tests/IMC.cpp
+IMC.h
+/workspaces/IMC/IMC-tests/IMC.h
+sstream
+-
+string
+-
+nlohmann/json.hpp
+-
+
+/workspaces/IMC/IMC-tests/IMC.h
+iostream
+-
+cmath
+-
+curl/curl.h
+-
+string
+-
+

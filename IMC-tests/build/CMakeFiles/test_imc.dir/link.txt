@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/test_imc.dir/test/test_IMC.cpp.o  -o test_imc  libimc_lib.a lib/libgtest.a -lpthread -lpthread 

@@ -21,7 +21,10 @@
 #include <sstream> // Para std::stringstream
 #include <string>
 
-
+Persona::Persona(const double &peso, const double &altura){
+    this->altura=altura;
+    this->peso=peso;
+}
 
 Persona::Persona() {
 double peso=0, altura=0;
