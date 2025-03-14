@@ -20,7 +20,7 @@
 #include "Persona.h"
 #include <sstream> // Para std::stringstream
 #include <string>
-#include <nlohmann/json.hpp> // Biblioteca JSON
+#include "nlohmann/json.hpp" // Biblioteca JSON
 
 
 Persona::Persona(double p, double a) : peso(p), altura(a) {}
