@@ -11,6 +11,7 @@ Este proyecto es un programa en C++ que permite calcular el Índice de Masa Corp
     Uso de bibliotecas
     Uso de APIs
     Reutilización de código
+    Test de software
     Software modular y compatibles con otro software
 
     
